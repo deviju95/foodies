@@ -2,20 +2,20 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./MainNavigation.css";
 
+import { FaBars } from "react-icons/fa";
+
 const MainNavigation = () => {
   return (
     <React.Fragment>
       <header className='nav-container'>
-        <button>
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className='mobile-nav__menu-btn'>
+          <FaBars />
+        </div>
         <h1 className='nav-title'>
           <Link to='/'>Foodies</Link>
         </h1>
-        <nav>
-          <ul>
+        <nav className='main-nav__wrapper'>
+          <ul className='main-nav__links'>
             <li>
               <NavLink to='/' exact>
                 Home
