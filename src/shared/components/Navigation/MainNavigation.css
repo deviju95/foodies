@@ -17,8 +17,10 @@
 }
 
 .nav-title {
-  color: #ff5252;
+  font-size: 2.4rem;
+  font-weight: 800;
 }
+
 .nav-title a {
   text-decoration: none;
   color: #ff5252;

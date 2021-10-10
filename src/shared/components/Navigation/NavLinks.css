@@ -15,32 +15,42 @@
   margin: 0 1rem;
 }
 .nav__links a {
-  text-decoration: none;
-
   display: flex;
   height: 3.8rem;
   align-items: center;
 
   color: #ffa1a1;
+
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 .nav__links a:hover,
 .nav__links a.active {
-  color: #ff5252;
+  color: #eb1c1c;
 
   border-bottom: 0.2rem solid #ff8585;
   padding-top: 0.2rem;
 }
 .nav__links button {
-  cursor: pointer;
   font: inherit;
-  margin-right: 1rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 
   border: 0.1rem solid #ffa1a1;
   color: #ffa1a1;
   border-radius: 8px;
   background: transparent;
 
+  margin-right: 1rem;
   padding: 0.5rem;
+  padding-bottom: 0.55rem;
+
+  cursor: pointer;
 }
 .nav__links button:hover {
   background: #fff;
