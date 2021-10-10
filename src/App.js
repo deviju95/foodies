@@ -8,14 +8,25 @@ import {
 
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
+import UserPlaces from "./contents/pages/UserPlaces";
+import UsersPage from "./contents/pages/UsersPage";
+
 const App = () => {
   return (
     <React.Fragment>
       <Router>
         <MainNavigation />
-        <main className='content'>
-          <h1>Hello World!</h1>
-        </main>
+        <Switch>
+          <main className='content'>
+            <Route to='/' exact>
+              <UsersPage />
+            </Route>
+            <Route path='/:userId/places' exact>
+              <UserPlaces />
+            </Route>
+            <Redirect to='/' />
+          </main>
+        </Switch>
       </Router>
     </React.Fragment>
   );
