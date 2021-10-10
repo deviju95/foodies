@@ -6,6 +6,7 @@ import "./MainNavigation.css";
 
 import NavLinks from "./NavLinks";
 import MobileNavigation from "./MobileNavigation";
+import Backdrop from "../UIElements/Backdrop";
 
 const MainNavigation = () => {
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false);
@@ -18,6 +19,7 @@ const MainNavigation = () => {
 
   return (
     <React.Fragment>
+      {mobileNavIsOpen && <Backdrop onClick={closeMobileNav} />}
       <MobileNavigation show={mobileNavIsOpen} onClick={closeMobileNav}>
         <NavLinks />
       </MobileNavigation>
