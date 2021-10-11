@@ -9,9 +9,7 @@ const DUMMY_PLACES = [
     id: "p1",
     title: "Chim Studio",
     description: "Chim's 2021 studio at Gangdong-Gu",
-    imageUrl:
-      "https://www.dogdrip.net/dvs/d/21/05/21/6d2f8cff9558158be42441038cb19668.png",
-
+    imageUrl: require("../../assets/chim1.png").default,
     address: "Gangdong-gu, Seoul, South Korea",
     location: {
       lat: 37.5492942,
@@ -23,9 +21,7 @@ const DUMMY_PLACES = [
     id: "p2",
     title: "bbyoe chicken",
     description: "뼈치킨이라는 개념을 사는거죠",
-    imageUrl:
-      "https://img.battlepage.com/upload/2020/1224/24184237c0976113522dab0f2496f0dd18a840ee.jpg",
-
+    imageUrl: require("../../assets/chim2.jpg").default,
     address: "Gangdong-gu, Seoul, South Korea",
     location: {
       lat: 37.5492942,

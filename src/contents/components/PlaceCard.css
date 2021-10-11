@@ -1,0 +1,36 @@
+.place-card__container {
+  margin: 1rem 0;
+}
+
+.place-card__card {
+  padding: 0;
+}
+
+.place-card__img-wrapper {
+  width: 100%;
+  height: 20rem;
+}
+.place-card__img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.place-card__text-wrapper {
+  margin: 1rem;
+}
+.place-card__text-wrapper h2,
+.place-card__text-wrapper h3,
+.place-card__text-wrapper p {
+  margin: 0 0 0.5rem 0;
+}
+
+.place-card__btn-wrapper {
+  margin: 1rem;
+}
+
+.map-container{}
+
+@media screen and {max-width: 768px)
+    
+}

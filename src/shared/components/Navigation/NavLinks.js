@@ -1,6 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+
 import "./NavLinks.css";
+
+import Button from "../UIElements/Button";
 
 const NavLinks = () => {
   return (
@@ -20,7 +23,7 @@ const NavLinks = () => {
         <NavLink to='/auth'>Login</NavLink>
       </li>
       <li>
-        <button>Logout</button>
+        <Button inverse>Logout</Button>
       </li>
     </ul>
   );

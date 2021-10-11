@@ -35,26 +35,11 @@
   padding-top: 0.2rem;
 }
 .nav__links button {
-  font: inherit;
-  font-size: 1.2rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
+  color: #ff8585;
+  border: 0.05rem solid #ff8585;
 
-  border: 0.1rem solid #ffa1a1;
-  color: #ffa1a1;
-  border-radius: 8px;
-  background: transparent;
-
-  margin-right: 1rem;
   padding: 0.5rem;
   padding-bottom: 0.55rem;
-
-  cursor: pointer;
-}
-.nav__links button:hover {
-  background: #fff;
-  color: #ff5252;
 }
 
 @media screen and (max-width: 768px) {
@@ -86,16 +71,6 @@
     background-position: -100%;
   }
   .nav__links button {
-    border: 0.05rem solid #ff5252;
-    color: #ff5252;
-
     margin-left: 2rem;
-  }
-  .nav__links button:hover,
-  .nav__links button:active {
-    transition: all 0.2s ease-in-out;
-
-    background: #ff5252;
-    color: #fff;
   }
 }
