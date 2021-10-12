@@ -14,7 +14,7 @@ const Users = () => {
       id: "u2",
       name: "Justin Jang",
       image: "https://justin-jang.com/static/media/profile-img.60e75f9c.png",
-      places: 1,
+      places: 0,
     },
   ];
   return (

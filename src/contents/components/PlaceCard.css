@@ -1,5 +1,5 @@
 .place-card__container {
-  margin: 1rem 0;
+  margin: 3rem 0;
 }
 
 .place-card__card {
@@ -19,18 +19,37 @@
 .place-card__text-wrapper {
   margin: 1rem;
 }
-.place-card__text-wrapper h2,
-.place-card__text-wrapper h3,
+.place-card__text-wrapper h2 {
+  margin: 0 0 0.5rem 0;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.place-card__text-wrapper h3 {
+  margin: 0 0 0.5rem 0;
+
+  font-size: 1rem;
+  font-weight: 200;
+  font-style: italic;
+  color: #636e72;
+}
 .place-card__text-wrapper p {
   margin: 0 0 0.5rem 0;
+
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .place-card__btn-wrapper {
   margin: 1rem;
 }
 
-.map-container{}
+/* Modal */
+.map-container {
+  width: 60vw;
+  height: 60vh;
+}
 
-@media screen and {max-width: 768px)
-    
+.delete-warning {
+  padding: 0 1rem;
 }

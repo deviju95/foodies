@@ -1,10 +1,11 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 
 import "./MobileNavigation.css";
 
 const MobileNavigation = (props) => {
-  return (
+  const content = (
     <CSSTransition
       in={props.show}
       classNames='slide-in-left'
@@ -16,6 +17,11 @@ const MobileNavigation = (props) => {
         {props.children}
       </div>
     </CSSTransition>
+  );
+
+  return ReactDOM.createPortal(
+    content,
+    document.getElementById("mobile-nav-hook")
   );
 };
 

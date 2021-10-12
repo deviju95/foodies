@@ -29,8 +29,8 @@ const DUMMY_PLACES = [
     },
   },
   {
-    creator: "u2",
-    id: "p1",
+    creator: "u1",
+    id: "p3",
     title: "K-Town Ttoekbokki",
     description: "낭만이 있는 떡볶이",
     imageUrl:

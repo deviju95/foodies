@@ -4,25 +4,58 @@ import "./PlaceCard.css";
 
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/UIElements/Button";
+import Modal from "../../shared/components/UIElements/Modal";
+import GoogleMaps from "../../shared/components/UIElements/GoogleMaps";
 
 const PlaceCard = (props) => {
   const [openMap, setOpenMap] = useState(false);
   const openMapHandler = () => setOpenMap(true);
   const closeMapHandler = () => setOpenMap(false);
 
+  const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const showDeleteWarningHandler = () => {
+    setShowDeleteWarning(true);
+  };
+  const cancelDeleteHandler = () => {
+    setShowDeleteWarning(false);
+  };
+  const confirmDeleteHandler = () => {
+    setShowDeleteWarning(false);
+    console.log("Deleting...");
+  };
+
   return (
     <React.Fragment>
-      <modal show={openMap} onCancel={closeMapHandler}>
-        <di className='map-container'>
-          <map />
-        </di>
-      </modal>
-      <modal>
-        <p>
+      <Modal
+        show={openMap}
+        onCancel={closeMapHandler}
+        header={props.address}
+        footer={<Button onClick={closeMapHandler}>Close</Button>}
+      >
+        <div className='map-container'>
+          <GoogleMaps center={props.coordinates} zoom={16} />
+        </div>
+      </Modal>
+
+      <Modal
+        show={showDeleteWarning}
+        onCancel={cancelDeleteHandler}
+        header='Are you sure?'
+        footer={
+          <React.Fragment>
+            <Button onClick={cancelDeleteHandler}>Cancel</Button>
+            <Button danger onClick={confirmDeleteHandler}>
+              Delete
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <p className='delete-warning'>
           Do you want to proceed and delete this place? Please note that it
           can't be undon thereafter.
         </p>
-      </modal>
+      </Modal>
+
       <li className='place-card__container'>
         <Card className='place-card__card'>
           <div className='place-card__img-wrapper'>
@@ -36,7 +69,9 @@ const PlaceCard = (props) => {
           <div className='place-card__btn-wrapper'>
             <Button onClick={openMapHandler}>view map</Button>
             <Button>edit</Button>
-            <Button danger>delete</Button>
+            <Button danger onClick={showDeleteWarningHandler}>
+              delete
+            </Button>
           </div>
         </Card>
       </li>

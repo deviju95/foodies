@@ -1,7 +1,6 @@
 .user-card__container {
   margin: 1rem;
-  width: 40vw;
-  min-width: 17.5rem;
+  width: 20rem;
 }
 .user-card__container:hover h3 {
   transition: color 0.15s ease-in-out;
