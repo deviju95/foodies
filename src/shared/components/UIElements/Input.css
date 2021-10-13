@@ -1,0 +1,55 @@
+.input-container {
+  border-bottom: 1px solid #ccc;
+
+  padding: 1rem;
+}
+
+.input-container label,
+.input-container input,
+.input-container textarea {
+  display: block;
+}
+
+.input-container label {
+  font: inherit;
+  font-weight: 500;
+
+  margin-bottom: 0.5rem;
+}
+
+.input-container input,
+.input-container textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: -0.2rem;
+  font: inherit;
+
+  border: none;
+  border-radius: 6px;
+
+  padding: 0.15rem 0.25rem;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+  outline: none;
+  border-color: #510077;
+}
+
+.input-container--invalid label,
+.input-container--invalid p {
+  color: red;
+}
+
+.input-container--invalid input,
+.input-container--invalid textarea {
+  border-color: red;
+  background: #ffd1d1;
+}
+
+::placeholder {
+  font: inherit;
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}

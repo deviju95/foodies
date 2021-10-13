@@ -4,13 +4,19 @@ import "./PlaceList.css";
 
 import Card from "../../shared/components/UIElements/Card";
 import PlaceCard from "./PlaceCard";
+import Button from "../../shared/components/UIElements/Button";
 
 const PlaceList = (props) => {
   if (props.items.length === 0) {
     return (
-      <div>
+      <div className='center-item'>
         <Card>
-          <h2>No foodies yet! Maybe create one?</h2>
+          <h2 className='create-place-text'>
+            No foodies yet! Maybe create one?
+          </h2>
+          <Button inverse to='/places/new'>
+            New Place
+          </Button>
         </Card>
       </div>
     );

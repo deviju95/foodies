@@ -1,0 +1,16 @@
+.form {
+  list-style: none;
+  width: 90%;
+  max-width: 40rem;
+
+  margin: 0 auto;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
+}
+
+.form-btn-wrapper {
+  text-align: right;
+  padding: 1rem 0;
+}
