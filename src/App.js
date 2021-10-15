@@ -11,7 +11,7 @@ import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import Users from "./contents/pages/Users";
 import UserPlaces from "./contents/pages/UserPlaces";
 import NewPlace from "./contents/pages/NewPlace";
-import EditPlace from "./contents/pages/EditPlace";
+import UpdatePlace from "./contents/pages/UpdatePlace";
 
 const App = () => {
   return (
@@ -30,7 +30,7 @@ const App = () => {
               <NewPlace />
             </Route>
             <Route path='/places/:placeId'>
-              <EditPlace />
+              <UpdatePlace />
             </Route>
             <Redirect to='/' />
           </main>

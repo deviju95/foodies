@@ -36,6 +36,8 @@
   border-color: #510077;
 }
 
+/* isValid: false */
+
 .input-container--invalid label,
 .input-container--invalid p {
   color: red;
