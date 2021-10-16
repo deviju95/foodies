@@ -46,7 +46,12 @@ const PlaceCard = (props) => {
         header='Are you sure?'
         footer={
           <React.Fragment>
-            <Button onClick={cancelDeleteHandler}>Cancel</Button>
+            <Button
+              className='place-card__button'
+              onClick={cancelDeleteHandler}
+            >
+              Cancel
+            </Button>
             <Button danger onClick={confirmDeleteHandler}>
               Delete
             </Button>

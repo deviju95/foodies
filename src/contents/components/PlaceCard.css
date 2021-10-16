@@ -57,3 +57,7 @@
 .delete-warning {
   padding: 0 1rem;
 }
+
+.place-card__button {
+  margin-right: 1rem;
+}
