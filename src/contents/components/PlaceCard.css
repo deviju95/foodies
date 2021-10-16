@@ -43,6 +43,10 @@
 .place-card__btn-wrapper {
   margin: 1rem;
 }
+.place-card__btn-wrapper button,
+.place-card__btn-wrapper a {
+  margin-right: 1rem;
+}
 
 /* Modal */
 .map-container {

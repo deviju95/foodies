@@ -2,6 +2,7 @@
   border-bottom: 1px solid #ccc;
 
   padding: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .input-container label,
@@ -27,7 +28,7 @@
   border: none;
   border-radius: 6px;
 
-  padding: 0.15rem 0.25rem;
+  padding: 0.25rem 0.25rem;
 }
 
 .input-container input:focus,
@@ -38,14 +39,18 @@
 
 /* isValid: false */
 
-.input-container--invalid label,
 .input-container--invalid p {
+  margin: 0.3rem 0 0;
+
   color: red;
+  font-size: 0.9rem;
+  font-weight: 300;
+
+  text-align: left;
 }
 
 .input-container--invalid input,
 .input-container--invalid textarea {
-  border-color: red;
   background: #ffd1d1;
 }
 

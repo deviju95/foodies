@@ -1,0 +1,16 @@
+.auth-form-container {
+  width: 90%;
+  max-width: 40rem;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.auth-form-container form {
+  margin-bottom: 1rem;
+}
+
+.auth-btn {
+  margin-top: 2rem;
+}

@@ -8,7 +8,7 @@ const Users = () => {
       id: "u1",
       name: "Chimchak Lee",
       image: "https://asianwiki.com/images/c/c6/Lee_Mal-Nyeon-1982-p1.jpg",
-      places: 2,
+      places: 3,
     },
     {
       id: "u2",

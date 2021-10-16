@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import "./PlaceCard.css";
 
@@ -6,8 +6,11 @@ import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/UIElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import GoogleMaps from "../../shared/components/UIElements/GoogleMaps";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const PlaceCard = (props) => {
+  const auth = useContext(AuthContext);
+
   const [openMap, setOpenMap] = useState(false);
   const openMapHandler = () => setOpenMap(true);
   const closeMapHandler = () => setOpenMap(false);
@@ -68,10 +71,14 @@ const PlaceCard = (props) => {
           </div>
           <div className='place-card__btn-wrapper'>
             <Button onClick={openMapHandler}>view map</Button>
-            <Button>edit</Button>
-            <Button danger onClick={showDeleteWarningHandler}>
-              delete
-            </Button>
+            {auth.isLoggedIn && (
+              <Button to={`/places/${props.id}`}>edit</Button>
+            )}
+            {auth.isLoggedIn && (
+              <Button danger onClick={showDeleteWarningHandler}>
+                delete
+              </Button>
+            )}
           </div>
         </Card>
       </li>
