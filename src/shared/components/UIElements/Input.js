@@ -1,18 +1,18 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from 'react';
 
-import "./Input.css";
+import './Input.css';
 
-import { validate } from "../../util/validators";
+import { validate } from '../../util/validators';
 
 const inputReducer = (state, action) => {
   switch (action.type) {
-    case "CHANGE":
+    case 'CHANGE':
       return {
         ...state,
         value: action.inputVal,
         isValid: validate(action.inputVal, action.validators),
       };
-    case "TOUCHED":
+    case 'TOUCHED':
       return {
         ...state,
         isTouched: true,
@@ -26,7 +26,7 @@ const inputReducer = (state, action) => {
 
 const Input = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: props.initialValue || "",
+    value: props.initialValue || '',
     isTouched: false,
     isValid: props.initialIsValid || false,
   });
@@ -39,19 +39,19 @@ const Input = (props) => {
 
   const changeHandler = (event) => {
     dispatch({
-      type: "CHANGE",
+      type: 'CHANGE',
       inputVal: event.target.value,
       validators: props.validators,
     });
   };
   const touchHandler = () => {
     dispatch({
-      type: "TOUCHED",
+      type: 'TOUCHED',
     });
   };
 
   const element =
-    props.element === "input" ? (
+    props.element === 'input' ? (
       <input
         id={props.id}
         type={props.type}
@@ -76,7 +76,7 @@ const Input = (props) => {
       className={`input-container ${
         !inputState.isValid &&
         inputState.isTouched &&
-        "input-container--invalid"
+        'input-container--invalid'
       }`}
     >
       <label htmlFor={props.id}>{props.label}</label>

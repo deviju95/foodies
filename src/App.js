@@ -1,19 +1,19 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import MainNavigation from "./shared/components/Navigation/MainNavigation";
+import MainNavigation from './shared/components/Navigation/MainNavigation';
 
-import Users from "./contents/pages/Users";
-import UserPlaces from "./contents/pages/UserPlaces";
-import NewPlace from "./contents/pages/NewPlace";
-import UpdatePlace from "./contents/pages/UpdatePlace";
-import Auth from "./contents/pages/Auth";
-import { AuthContext } from "./shared/context/auth-context";
+import Users from './contents/pages/Users';
+import UserPlaces from './contents/pages/UserPlaces';
+import NewPlace from './contents/pages/NewPlace';
+import UpdatePlace from './contents/pages/UpdatePlace';
+import Auth from './contents/pages/Auth';
+import { AuthContext } from './shared/context/auth-context';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,6 +25,7 @@ const App = () => {
   }, []);
 
   let routes;
+
   if (isLoggedIn) {
     routes = (
       <Switch>
