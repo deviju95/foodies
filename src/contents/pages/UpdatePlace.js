@@ -1,171 +1,142 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useForm } from "../../shared/hooks/form-hook";
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
-import "./Form.css";
+import './Form.css';
 
-import Input from "../../shared/components/UIElements/Input";
-import Button from "../../shared/components/UIElements/Button";
+import { useForm } from '../../shared/hooks/form-hook';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import { AuthContext } from '../../shared/context/auth-context';
+
+import Input from '../../shared/components/UIElements/Input';
+import Button from '../../shared/components/UIElements/Button';
+import Card from '../../shared/components/UIElements/Card';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
-} from "../../shared/util/validators";
-import Card from "../../shared/components/UIElements/Card";
-
-const DUMMY_PLACES = [
-  {
-    creator: "u1",
-    id: "p1",
-    title: "Chim Studio",
-    description: "Chim's 2021 studio at Gangdong-Gu",
-    imageUrl: require("../../assets/chim1.png").default,
-    address: "Gangdong-gu, Seoul, South Korea",
-    location: {
-      lat: 37.5492942,
-      lng: 127.111408,
-    },
-  },
-  {
-    creator: "u1",
-    id: "p2",
-    title: "bbyoe chicken",
-    description: "뼈치킨이라는 개념을 사는거죠",
-    imageUrl: require("../../assets/chim2.jpg").default,
-    address: "Gangdong-gu, Seoul, South Korea",
-    location: {
-      lat: 37.5492942,
-      lng: 127.111408,
-    },
-  },
-  {
-    creator: "u1",
-    id: "",
-    title: "K-Town Ttoekbokki",
-    description: "낭만이 있는 떡볶이",
-    imageUrl:
-      "https://mblogthumb-phinf.pstatic.net/20141223_171/ribbonliz_1419289497073AXY3i_JPEG/20141203_181205.jpg?type=w2",
-
-    address:
-      "H Mart City Center, 3500 W 6th St Suite 100, Los Angeles, CA 90020",
-    location: {
-      lat: 34.047449,
-      lng: -118.2999788,
-    },
-  },
-];
+} from '../../shared/util/validators';
 
 const UpdatePlace = () => {
+  const auth = useContext(AuthContext);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedPlace, setLoadedPlace] = useState();
+
   const placeId = useParams().placeId;
+  const history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
-        value: "",
+        value: '',
         isValid: false,
       },
       description: {
-        value: "",
-        isValid: false,
-      },
-      address: {
-        value: "",
+        value: '',
         isValid: false,
       },
     },
     false
   );
 
-  const identifiedPlace = DUMMY_PLACES.find((x) => x.id === placeId);
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
-    if (identifiedPlace) {
-      setFormData(
-        {
-          title: {
-            value: identifiedPlace.title,
-            isValid: true,
+    const fetchPlace = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/places/${placeId}`
+        );
+        setLoadedPlace(responseData.place);
+        setFormData(
+          {
+            title: {
+              value: responseData.place.title,
+              isValid: true,
+            },
+            description: {
+              value: responseData.place.description,
+              isValid: true,
+            },
           },
-          description: {
-            value: identifiedPlace.description,
-            isValid: true,
-          },
-          address: {
-            value: identifiedPlace.address,
-            isValid: true,
-          },
-        },
-        true
-      );
-    }
-    setIsLoading(false);
-  }, [setFormData, identifiedPlace]);
+          true
+        );
+      } catch (err) {}
+    };
+    fetchPlace();
+  }, [sendRequest, placeId, setFormData]);
 
-  const placeUpdateSubmitHandler = (event) => {
+  const placeUpdateSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
+    try {
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/places/${placeId}`,
+        'PATCH',
+        JSON.stringify({
+          title: formState.inputs.title.value,
+          description: formState.inputs.description.value,
+        }),
+        {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token,
+        }
+      );
+      history.push('/' + auth.userId + '/places');
+    } catch (err) {}
   };
 
-  if (!identifiedPlace) {
+  if (isLoading) {
+    return (
+      <div className='center-item'>
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!loadedPlace && !error) {
     return (
       <div className='center-item'>
         <Card>
-          <h2>Could not find place.</h2>
+          <h2>Could not find place!</h2>
         </Card>
       </div>
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className='center-item'>
-        <h2>Loading...</h2>
-      </div>
-    );
-  }
-
   return (
-    <form className='form' onSubmit={placeUpdateSubmitHandler}>
-      <Input
-        id='title'
-        element='input'
-        type='text'
-        label='Title'
-        placeholder='Write your title here....'
-        validators={[VALIDATOR_REQUIRE()]}
-        errorText='Please enter a valid title.'
-        onInput={inputHandler}
-        initialValue={formState.inputs.title.value}
-        initialIsValid={formState.inputs.title.isValid}
-      />
-      <Input
-        id='description'
-        element='textarea'
-        label='Description'
-        placeholder='Describe your place here...'
-        validators={[VALIDATOR_MINLENGTH(5)]}
-        errorText='Please enter a valid description (at least 5 characters).'
-        onInput={inputHandler}
-        initialValue={formState.inputs.description.value}
-        initialIsValid={formState.inputs.description.isValid}
-      />
-      <Input
-        id='address'
-        element='input'
-        label='Address'
-        placeholder='Write the address here...'
-        validators={[VALIDATOR_REQUIRE()]}
-        errorText='Please enter a valid address.'
-        onInput={inputHandler}
-        initialValue={formState.inputs.address.value}
-        initialIsValid={formState.inputs.address.isValid}
-      />
-      <div className='form-btn-wrapper'>
-        <Button inverse type='submit' disabled={!formState.formIsValid}>
-          Update Place
-        </Button>
-      </div>
-    </form>
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {!isLoading && loadedPlace && (
+        <form className='form' onSubmit={placeUpdateSubmitHandler}>
+          <Input
+            id='title'
+            element='input'
+            type='text'
+            label='Title'
+            placeholder='Write your title here....'
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText='Please enter a valid title.'
+            onInput={inputHandler}
+            initialValue={loadedPlace.title}
+            initialIsValid={true}
+          />
+          <Input
+            id='description'
+            element='textarea'
+            label='Description'
+            placeholder='Describe your place here...'
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            errorText='Please enter a valid description (at least 5 characters).'
+            onInput={inputHandler}
+            initialValue={loadedPlace.description}
+            initialIsValid={true}
+          />
+          <div className='form-btn-wrapper'>
+            <Button inverse type='submit' disabled={!formState.formIsValid}>
+              Update Place
+            </Button>
+          </div>
+        </form>
+      )}
+    </React.Fragment>
   );
 };
 

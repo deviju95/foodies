@@ -1,14 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react';
 
-import "./PlaceCard.css";
+import './PlaceCard.css';
 
-import Card from "../../shared/components/UIElements/Card";
-import Button from "../../shared/components/UIElements/Button";
-import Modal from "../../shared/components/UIElements/Modal";
-import GoogleMaps from "../../shared/components/UIElements/GoogleMaps";
-import { AuthContext } from "../../shared/context/auth-context";
+import Card from '../../shared/components/UIElements/Card';
+import Button from '../../shared/components/UIElements/Button';
+import Modal from '../../shared/components/UIElements/Modal';
+import GoogleMaps from '../../shared/components/UIElements/GoogleMaps';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import { AuthContext } from '../../shared/context/auth-context';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const PlaceCard = (props) => {
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
 
   const [openMap, setOpenMap] = useState(false);
@@ -22,13 +26,25 @@ const PlaceCard = (props) => {
   const cancelDeleteHandler = () => {
     setShowDeleteWarning(false);
   };
-  const confirmDeleteHandler = () => {
+  const confirmDeleteHandler = async () => {
     setShowDeleteWarning(false);
-    console.log("Deleting...");
+    try {
+      await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + `/places/${props.id}`,
+        'DELETE',
+        null,
+        {
+          Authorization: 'Bearer ' + auth.token,
+        }
+      );
+      props.onDelete(props.id);
+    } catch (err) {}
   };
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+
       <Modal
         show={openMap}
         onCancel={closeMapHandler}
@@ -66,8 +82,12 @@ const PlaceCard = (props) => {
 
       <li className='place-card__container'>
         <Card className='place-card__card'>
+          {isLoading && <LoadingSpinner asOverlay />}
           <div className='place-card__img-wrapper'>
-            <img src={props.image} alt={props.title} />
+            <img
+              src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
+              alt={props.title}
+            />
           </div>
           <div className='place-card__text-wrapper'>
             <h2>{props.title}</h2>
@@ -76,10 +96,10 @@ const PlaceCard = (props) => {
           </div>
           <div className='place-card__btn-wrapper'>
             <Button onClick={openMapHandler}>view map</Button>
-            {auth.isLoggedIn && (
+            {auth.userId === props.creatorId && (
               <Button to={`/places/${props.id}`}>edit</Button>
             )}
-            {auth.isLoggedIn && (
+            {auth.userId === props.creatorId && (
               <Button danger onClick={showDeleteWarningHandler}>
                 delete
               </Button>

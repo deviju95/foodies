@@ -12,7 +12,10 @@ const UserCard = (props) => {
       <Card className='user-card__card'>
         <Link to={`/${props.id}/places`}>
           <div className='user-card__img-wrapper'>
-            <Avatar image={props.image} alt={props.name} />
+            <Avatar
+              image={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
+              alt={props.name}
+            />
           </div>
           <div className='user-card__text-wrapper'>
             <h2>{props.name}</h2>

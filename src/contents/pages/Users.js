@@ -1,25 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 
-import UsersList from "../components/UserList";
+import UsersList from '../components/UserList';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const Users = () => {
-  const USERS = [
-    {
-      id: "u1",
-      name: "Chimchak Lee",
-      image: "https://asianwiki.com/images/c/c6/Lee_Mal-Nyeon-1982-p1.jpg",
-      places: 3,
-    },
-    {
-      id: "u2",
-      name: "Justin Jang",
-      image: "https://justin-jang.com/static/media/profile-img.60e75f9c.png",
-      places: 0,
-    },
-  ];
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedUsers, setLoadedUsers] = useState();
+
+  useEffect(() => {
+    // Cannot use async (promise) directly inside useEffect.
+    // so we have to create another function inside to use async and await promise.
+    const fetchUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          process.env.REACT_APP_BACKEND_URL + '/users'
+        );
+
+        setLoadedUsers(responseData.users);
+      } catch (err) {}
+    };
+    fetchUsers();
+  }, [sendRequest]);
+
   return (
     <React.Fragment>
-      <UsersList items={USERS} />
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className='center-item'>
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
     </React.Fragment>
   );
 };

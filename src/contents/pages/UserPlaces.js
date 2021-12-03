@@ -1,53 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 import PlaceList from '../components/PlaceList';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
-const DUMMY_PLACES = [
-  {
-    creator: 'u1',
-    id: 'p1',
-    title: 'Chim Studio',
-    description: "Chim's 2021 studio at Gangdong-Gu",
-    imageUrl: require('../../assets/chim1.png').default,
-    address: 'Gangdong-gu, Seoul, South Korea',
-    location: {
-      lat: 37.5492942,
-      lng: 127.111408,
-    },
-  },
-  {
-    creator: 'u1',
-    id: 'p2',
-    title: 'bbyoe chicken',
-    description: '뼈치킨이라는 개념을 사는거죠',
-    imageUrl: require('../../assets/chim2.jpg').default,
-    address: 'Gangdong-gu, Seoul, South Korea',
-    location: {
-      lat: 37.5492942,
-      lng: 127.111408,
-    },
-  },
-  {
-    creator: 'u1',
-    id: 'p3',
-    title: 'K-Town Ttoekbokki',
-    description: '낭만이 있는 떡볶이',
-    imageUrl:
-      'https://mblogthumb-phinf.pstatic.net/20141223_171/ribbonliz_1419289497073AXY3i_JPEG/20141203_181205.jpg?type=w2',
-
-    address:
-      'H Mart City Center, 3500 W 6th St Suite 100, Los Angeles, CA 90020',
-    location: {
-      lat: 34.047449,
-      lng: -118.2999788,
-    },
-  },
-];
 const UserPlaces = () => {
+  const [loadedPlaces, setLoadedPlaces] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
   const userId = useParams().userId;
-  const loadedPlaces = DUMMY_PLACES.filter((place) => place.creator === userId);
-  return <PlaceList items={loadedPlaces} />;
+
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/places/user/${userId}`
+        );
+        setLoadedPlaces(responseData.places);
+      } catch (err) {}
+    };
+    fetchPlaces();
+  }, [sendRequest, userId]);
+
+  const placeDeletedHandler = (deletedPlaceId) => {
+    setLoadedPlaces((prevPlaces) =>
+      prevPlaces.filter((place) => place.id !== deletedPlaceId)
+    );
+  };
+
+  return (
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className='center-item'>
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && loadedPlaces && (
+        <PlaceList items={loadedPlaces} onDeletePlace={placeDeletedHandler} />
+      )}
+    </React.Fragment>
+  );
 };
 
 export default UserPlaces;

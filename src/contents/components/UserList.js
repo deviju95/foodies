@@ -4,6 +4,7 @@ import './UserList.css';
 
 import UserCard from './UserCard';
 import Card from '../../shared/components/UIElements/Card';
+
 const UserList = (props) => {
   if (props.items.length === 0) {
     return (
@@ -17,13 +18,14 @@ const UserList = (props) => {
 
   return (
     <ul className='user-list'>
+      {/* props.items include all user datas */}
       {props.items.map((user) => (
         <UserCard
           key={user.id}
           id={user.id}
           image={user.image}
           name={user.name}
-          placeCount={user.places}
+          placeCount={user.places.length}
         />
       ))}
     </ul>
