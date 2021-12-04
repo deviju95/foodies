@@ -101,6 +101,8 @@ const NewPlace = () => {
           id='image'
           onInput={inputHandler}
           errorText='Please provide an image.'
+          previewSize='foodies_preview_size'
+          placeholder='Please pick an image...'
         />
         <div className='form-btn-wrapper'>
           <Button inverse type='submit' disabled={!formState.formIsValid}>

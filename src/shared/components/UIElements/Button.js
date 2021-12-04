@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import "./Button.css";
+import './Button.css';
 
 const Button = (props) => {
   if (props.href) {
@@ -9,8 +9,8 @@ const Button = (props) => {
       <a
         href={props.href}
         className={`button ${props.className} ${
-          props.inverse && "button-inverse"
-        } ${props.danger && "button-danger"}`}
+          props.inverse && 'button-inverse'
+        } ${props.danger && 'button-danger'}`}
       >
         {props.children}
       </a>
@@ -22,8 +22,8 @@ const Button = (props) => {
         to={props.to}
         exact={props.exact}
         className={`button ${props.className} ${
-          props.inverse && "button-inverse"
-        } ${props.danger && "button-danger"}`}
+          props.inverse && 'button-inverse'
+        } ${props.danger && 'button-danger'}`}
       >
         {props.children}
       </Link>
@@ -32,10 +32,11 @@ const Button = (props) => {
   return (
     <button
       className={`button ${props.className} ${
-        props.inverse && "button-inverse"
-      } ${props.danger && "button-danger"}`}
+        props.inverse && 'button-inverse'
+      } ${props.danger && 'button-danger'}`}
       type={props.type}
       onClick={props.onClick}
+      onBlur={props.onBlur}
       disabled={props.disabled}
     >
       {props.children}

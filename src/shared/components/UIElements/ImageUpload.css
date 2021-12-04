@@ -1,23 +1,48 @@
-.image-upload.center {
+.image_upload__container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  padding: 1rem;
+  padding-bottom: 0.5rem;
 }
 
-.image-upload__preview {
-  width: 13rem;
-  height: 13rem;
+.image_upload__preview {
   border: 1px solid #ccc;
+  border-radius: 6px;
+
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-bottom: 1rem;
+
+  margin-bottom: 0.5rem;
 }
 
-.image-upload__preview img {
+.preview_placeholder {
+  font-family: inherit;
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  cursor: default;
+}
+
+.image_upload__preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.button_center {
+  text-align: center;
+}
+
+/* Error Text */
+.image_upload__invalid {
+  margin: 0.3rem 0 0;
+
+  color: red;
+  font-size: 0.9rem;
+  font-weight: 300;
 }

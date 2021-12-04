@@ -8,6 +8,7 @@ const ImageUpload = (props) => {
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
 
   const filePickerRef = useRef();
 
@@ -43,27 +44,41 @@ const ImageUpload = (props) => {
     filePickerRef.current.click();
   };
 
+  const touchHandler = () => {
+    setIsTouched(true);
+  };
+
   return (
     <React.Fragment>
-      <div className={{ margin: '1rem 0' }}>
+      <div className='image_upload__container'>
         <input
           id={props.id}
-          ref={filePickerRef}
           style={{ display: 'none' }}
+          ref={filePickerRef}
           type='file'
           accept='.jpg,.png,.jpeg'
           onChange={pickedHandler}
         />
-        <div className={`image-upload ${props.center && 'center'}`}>
-          <div className='image-upload__preview'>
+        <div>
+          <div className={`${props.previewSize} image_upload__preview `}>
             {previewUrl && <img src={previewUrl} alt='Preview' />}
-            {!previewUrl && <p>Please pick an image.</p>}
+            {!previewUrl && (
+              <p className='preview_placeholder'>{props.placeholder}</p>
+            )}
           </div>
-          <Button type='button' onClick={pickImageHandler}>
-            PICK IMAGE
-          </Button>
+          <div className='button_center'>
+            <Button
+              type='button'
+              onBlur={touchHandler}
+              onClick={pickImageHandler}
+            >
+              Pick Image
+            </Button>
+          </div>
         </div>
-        {!isValid && <p>{props.errorText}</p>}
+        {!isValid && isTouched && (
+          <p className='image_upload__invalid'>{props.errorText}</p>
+        )}
       </div>
     </React.Fragment>
   );

@@ -42,6 +42,7 @@ const Auth = () => {
       setFormData(
         {
           ...formState.inputs,
+          // name input does not exist in login mode.
           name: undefined,
           image: undefined,
         },
@@ -145,6 +146,8 @@ const Auth = () => {
               id='image'
               onInput={inputHandler}
               errorText='Please provide an image.'
+              placeholder='Choose a profile image...'
+              previewSize='profile_preview_size'
             />
           )}
           <Input

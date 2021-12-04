@@ -14,3 +14,8 @@
 .auth-btn {
   margin-top: 2rem;
 }
+
+.profile_preview_size {
+  width: 11rem;
+  height: 11rem;
+}
