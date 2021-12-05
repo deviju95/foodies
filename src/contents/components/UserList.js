@@ -9,7 +9,7 @@ const UserList = (props) => {
   if (props.items.length === 0) {
     return (
       <div className='center-item'>
-        <Card>
+        <Card className='no_user_card'>
           <p>There are no users yet.</p>
         </Card>
       </div>

@@ -84,10 +84,7 @@ const PlaceCard = (props) => {
         <Card className='place-card__card'>
           {isLoading && <LoadingSpinner asOverlay />}
           <div className='place-card__img-wrapper'>
-            <img
-              src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
-              alt={props.title}
-            />
+            <img src={props.image} alt={props.title} />
           </div>
           <div className='place-card__text-wrapper'>
             <h2>{props.title}</h2>

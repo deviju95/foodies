@@ -11,17 +11,16 @@ const UserCard = (props) => {
     <li className='user-card__container'>
       <Card className='user-card__card'>
         <Link to={`/${props.id}/places`}>
-          <div className='user-card__img-wrapper'>
-            <Avatar
-              image={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
-              alt={props.name}
-            />
-          </div>
-          <div className='user-card__text-wrapper'>
-            <h2>{props.name}</h2>
-            <h3>
-              {props.placeCount} {props.placeCount === 1 ? 'Place' : 'Places'}
-            </h3>
+          <div className='user_card__content_wrapper'>
+            <div className='user-card__img-wrapper'>
+              <Avatar image={props.image} alt={props.name} />
+            </div>
+            <div className='user-card__text-wrapper'>
+              <h2>{props.name}</h2>
+              <h3>
+                {props.placeCount} {props.placeCount === 1 ? 'Place' : 'Places'}
+              </h3>
+            </div>
           </div>
         </Link>
       </Card>

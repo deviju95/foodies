@@ -123,66 +123,68 @@ const Auth = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <Card className='auth-form-container'>
-        {isLoading && <LoadingSpinner asOverlay />}
-        <h2>Login Required</h2>
-        <hr />
-        <form onSubmit={authSubmitHandler}>
-          {!isLoginMode && (
+      <div className='center-item'>
+        <Card className='auth-form-container'>
+          {isLoading && <LoadingSpinner asOverlay />}
+          <h2>Login Required</h2>
+          <hr />
+          <form onSubmit={authSubmitHandler}>
+            {!isLoginMode && (
+              <Input
+                element='input'
+                id='name'
+                type='text'
+                label='Your Name'
+                placeholder='Write your name here...'
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText='Please enter a name.'
+                onInput={inputHandler}
+              />
+            )}
+            {!isLoginMode && (
+              <ImageUpload
+                center
+                id='image'
+                onInput={inputHandler}
+                errorText='Please provide an image.'
+                placeholder='Choose a profile image...'
+                previewSize='profile_preview_size'
+              />
+            )}
             <Input
               element='input'
-              id='name'
-              type='text'
-              label='Your Name'
-              placeholder='Write your name here...'
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText='Please enter a name.'
+              id='email'
+              type='email'
+              label='E-mail'
+              placeholder='Enter your e-mail here...'
+              validators={[VALIDATOR_EMAIL()]}
+              errorText='Please enter a valid email.'
               onInput={inputHandler}
             />
-          )}
-          {!isLoginMode && (
-            <ImageUpload
-              center
-              id='image'
+            <Input
+              element='input'
+              id='password'
+              type='password'
+              label='Password'
+              placeholder='Enter password here...'
+              validators={[VALIDATOR_MINLENGTH(6)]}
+              errorText='Please enter a valid password, at least 5 characters.'
               onInput={inputHandler}
-              errorText='Please provide an image.'
-              placeholder='Choose a profile image...'
-              previewSize='profile_preview_size'
             />
-          )}
-          <Input
-            element='input'
-            id='email'
-            type='email'
-            label='E-mail'
-            placeholder='Enter your e-mail here...'
-            validators={[VALIDATOR_EMAIL()]}
-            errorText='Please enter a valid email.'
-            onInput={inputHandler}
-          />
-          <Input
-            element='input'
-            id='password'
-            type='password'
-            label='Password'
-            placeholder='Enter password here...'
-            validators={[VALIDATOR_MINLENGTH(6)]}
-            errorText='Please enter a valid password, at least 5 characters.'
-            onInput={inputHandler}
-          />
-          <Button
-            className='auth-btn'
-            inverse
-            type='submit'
-            disabled={!formState.formIsValid}
-          >
-            {isLoginMode ? 'Login' : 'Sign up'}
+            <Button
+              className='auth-btn'
+              inverse
+              type='submit'
+              disabled={!formState.formIsValid}
+            >
+              {isLoginMode ? 'Login' : 'Sign up'}
+            </Button>
+          </form>
+          <Button onClick={switchModeHandler}>
+            {isLoginMode ? 'Sign up' : 'Login'}
           </Button>
-        </form>
-        <Button onClick={switchModeHandler}>
-          {isLoginMode ? 'Sign up' : 'Login'}
-        </Button>
-      </Card>
+        </Card>
+      </div>
     </React.Fragment>
   );
 };

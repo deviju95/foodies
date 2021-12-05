@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaBars } from "react-icons/fa";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa';
 
-import "./MainNavigation.css";
+import './MainNavigation.css';
 
-import NavLinks from "./NavLinks";
-import MobileNavigation from "./MobileNavigation";
-import Backdrop from "../UIElements/Backdrop";
+import NavLinks from './NavLinks';
+import MobileNavigation from './MobileNavigation';
+import Backdrop from '../UIElements/Backdrop';
 
 const MainNavigation = () => {
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false);

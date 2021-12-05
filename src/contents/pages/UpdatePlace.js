@@ -94,7 +94,7 @@ const UpdatePlace = () => {
   if (!loadedPlace && !error) {
     return (
       <div className='center-item'>
-        <Card>
+        <Card className='error_card'>
           <h2>Could not find place!</h2>
         </Card>
       </div>

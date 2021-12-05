@@ -10,7 +10,7 @@ const PlaceList = (props) => {
   if (props.items.length === 0) {
     return (
       <div className='center-item'>
-        <Card>
+        <Card className='create_place_card'>
           <h2 className='create-place-text'>
             No foodies yet! Maybe create one?
           </h2>
