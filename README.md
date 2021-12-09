@@ -14,7 +14,7 @@ A social media platform to share your best go to food places.
 
   1. Created React custom hooks and React context to optimize frontend logic.
   2. Created REST api using Node.js and express to process CRUD operation.
-  3. Used Mongo DB to store user datas, while securing user information through bcrypt and JWT token encryption.
+  3. Used Mongo DB and AWS s3 to store datas, while securing user information through bcrypt and JWT token encryption.
 
 ## Built With
 
