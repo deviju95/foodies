@@ -72,7 +72,7 @@ const Auth = () => {
     // after login or signup, page redirected to...
 
     if (isLoginMode) {
-      // for logging in -----------
+      // // for logging in -----------
       try {
         // created HttpRequest Hook to be used whenever fetching data from database.
         const responseData = await sendRequest(
